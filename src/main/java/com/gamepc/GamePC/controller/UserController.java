@@ -24,8 +24,15 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
         return ResponseEntity.of(userService.findUserById(id));
+    }
+
+    @PostMapping("")
+    public ResponseEntity<User> saveUser(@RequestBody User user){
+        System.out.println(user.toString());
+        userService.saveUser(user);
+        return ResponseEntity.ok(user);
     }
 
     // TODO : Transaction Error 시 예외 처리 방법 작성
@@ -40,5 +47,4 @@ public class UserController {
         userService.saveUser(user);
         return ResponseEntity.ok(user);
     }
-
 }
